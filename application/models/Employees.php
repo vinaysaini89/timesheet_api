@@ -61,6 +61,24 @@ class Employees extends CI_Model {
 			
 		}
 
+		public function getTodayLogindata($emp_id)
+		{ 	
+			$this->db->select('*');           
+			$this->db->from('timesheet');
+			$this->db->where('emp_id', $emp_id);
+		    $this->db->where('Date(login_date)', 'CURDATE()', FALSE);
+			$query=$this->db->get();
+			
+			if($query->num_rows() > 0)
+			{
+				
+				return $query->row();
+			}
+			
+			return false;
+			
+		}
+
 		
 		
 }

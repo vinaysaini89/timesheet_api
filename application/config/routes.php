@@ -55,6 +55,10 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login']['GET'] 	= 'auth/login';
 $route['login']['POST'] = 'auth/postLogin';
 $route['logout']['POST'] = 'auth/logout';
+$route['projects']['GET'] = 'project/index';
+$route['checklogout']['GET'] = 'auth/checklogout';
+$route['create_report']['POST'] = 'project/createreports';
+$route['reason']['POST'] = 'project/timesheetreason';
 
 
 //Admin Dashborad

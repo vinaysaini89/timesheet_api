@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
 					if($login_date = $this->employees->checkLogout($emp_id)){
 					echo json_encode(['code'=>400, "message"=>'You are already logged Out']);
 					die();
-				}
+					}
 
 					$this->timesheet->timeSheetDataUpdate($emp_id);
 					
@@ -87,6 +87,60 @@ class Auth extends CI_Controller {
 
 	}
 
+
+	public function checkLogout()
+	{
+		if($this->input->server('REQUEST_METHOD') == 'GET'){
+			$emp_id = $this->input->get('emp_id');
+			$password = $this->input->get('password');
+			if(!$emp_id)
+					{
+						echo json_encode(['code'=>401, "message"=>'Employee id is required']);
+						die();
+					}
+			if(!$password)
+					{
+						echo json_encode(['code'=>401, "message"=>'Password id is required']);
+						die();
+					
+					}
+
+			if($emp = $this->employees->login($emp_id, $password))
+				{
+					if($login_date = $this->employees->checkLogout($emp_id))
+					{
+						echo json_encode(['code'=>200, "message"=>'You are already logged Out']);
+						die();
+					}
+					else
+					{
+						if($login_data = $this->employees->getTodayLogindata($emp_id))
+						{
+							$emp->logged_in_time = $login_data->login_date;
+						}
+						else{
+							$emp->logged_in_time = $login_data;
+						}
+						
+						echo json_encode(['code'=>400, "message"=>'You are not logged Out',"data" => $emp]);
+						die();
+
+					}
+
+			}
+			else
+			{
+				echo json_encode(['code'=>401, "message"=>'Employee id and password does not match!']);
+				die();
+			}
+		}
+		else
+		{
+			echo json_encode(['code'=>401, "message"=>'Method not allowed']);
+				die();
+		}
+
+	}
 
 	public function postlogin()
 	{
