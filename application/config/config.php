@@ -38,7 +38,7 @@ define('BASE_DIR' , '/var/www/html/timesheet/');
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
