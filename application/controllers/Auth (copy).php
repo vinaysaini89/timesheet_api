@@ -170,7 +170,17 @@ class Auth extends CI_Controller {
 							echo json_encode(['code'=>400, "message"=>'You are already logged in', 'data'=>$emp]);
 							die();
 						}	
-							
+							$start_time = date('Y-m-d H:i:s');
+							$timesheet_data = [
+
+								'emp_id' 			=> $emp_id,
+								'start_time' 		=> $start_time,
+								'end_time' 			=> '0'
+								
+								];
+
+							$this->timesheet->timeSheetData($timesheet_data);
+							$emp->logged_in_time = $start_time;
 						echo json_encode(['code'=>200, "message"=>'', 'data'=>$emp]);
 						die();
 					 
@@ -192,28 +202,4 @@ class Auth extends CI_Controller {
 		
 
 	}
-
-	public function timestart()
-	{
-		$emp_id = $this->input->get('emp_id');
-		if(!$emp_id)
-		{
-			echo json_encode(['code'=>401, "message"=>'Employee id is required']);
-			die();
-		}
-		$start_time = date('Y-m-d H:i:s');
-		$timesheet_data = [
-
-				'emp_id' 			=> $emp_id,
-				'start_time' 		=> $start_time,
-				'end_time' 			=> '0'
-								
-			];
-
-		$this->timesheet->timeSheetData($timesheet_data);
-		$data['logged_in_time'] = $start_time;
-		echo json_encode(['code'=>200, "message"=>'', 'data'=>$data]);
-		die();
-	}
-
 }
