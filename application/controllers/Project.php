@@ -50,8 +50,9 @@ class Project extends CI_Controller {
 	{
 		$total_working_hours = $this->input->post('total_working_hours');
 		$emp_id = $this->input->get('emp_id');
+		$login_time = $this->input->post('login_time');
 		$report_data = $this->input->post('report_data');
-
+		//print_r($report_data);die();
 		if(!$emp_id){
 			echo json_encode(['code'=>401, "message"=>'employees id is required']);
 			die();
@@ -66,19 +67,37 @@ class Project extends CI_Controller {
 			echo json_encode(['code'=>401, "message"=>'report data must be array']);
 			die();
 		}
+		/*$data = [];
+		$i=0;
+		foreach ($report_data as $key => $value) {
+			
+				$data[$i]['p_id'] = $value['project'];
+				//$data[$i]['p_id'] = $value['id'];
+				//$data[$i]['description'] = $value['description'];
+				$data[$i]['time'] = $value['time'];
+			
+
+
+			$i++;
+		}*/
+
 		$data = [];
 		$i=0;
 		foreach ($report_data as $key => $value) {
-			if($value['pro'] != 0 && $value['time'] != ""){
-				$data[$i]['p_id'] = $value['pro']['id'];
-				$data[$i]['p_name'] = $value['pro']['p_name'];
-				$data[$i]['description'] = $value['description'];
-				$data[$i]['time'] = $value['time'];
-			}
+				if($value['pro'] != 0 || ($value['time'] != "" && $value['time'] !=0))
+				{
+					$data[$i]['p_id'] = $value['pro']['id'];
+					//$data[$i]['p_id'] = $value['id'];
+					//$data[$i]['description'] = $value['description'];
+					$data[$i]['time'] = $value['time'];
+				}
 
 
 			$i++;
 		}
+
+		//print_r($data);die();
+
 		$this->emp_timesheet_reports->createReports($emp_id, $data);
 		echo json_encode(['code'=>200, "message"=>'']);
 		die();
@@ -93,7 +112,7 @@ class Project extends CI_Controller {
 		$report_data = $this->input->post('report_data');
 		$login_time = $this->input->post('login_time');
 		$reason = $this->input->post('reason');
-		//print_r($reason);die();
+		//print_r($report_data);die();
 		if(!$emp_id){
 			echo json_encode(['code'=>401, "message"=>'employees id is required']);
 			die();
@@ -121,16 +140,18 @@ class Project extends CI_Controller {
 		$data = [];
 		$i=0;
 		foreach ($report_data as $key => $value) {
-			if($value['pro'] != 0 && $value['time'] != ""){
-				$data[$i]['p_id'] = $value['pro']['id'];
-				$data[$i]['p_name'] = $value['pro']['p_name'];
-				$data[$i]['description'] = $value['description'];
-				$data[$i]['time'] = $value['time'];
-			}
+				if($value['pro'] != 0 || ($value['time'] != "" && $value['time'] !=0))
+				{
+					$data[$i]['p_id'] = $value['pro']['id'];
+					//$data[$i]['p_id'] = $value['id'];
+					//$data[$i]['description'] = $value['description'];
+					$data[$i]['time'] = $value['time'];
+				}
 
 
 			$i++;
 		}
+		//print_r($data);die();
 		$this->emp_timesheet_reports->createReports($emp_id, $data);
 		$this->timesheet_reasons->createReasons($emp_id, $login_time, $total_working_hours, $reason);
 		echo json_encode(['code'=>200, "message"=>'']);
