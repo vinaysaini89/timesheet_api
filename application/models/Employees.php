@@ -35,7 +35,7 @@ class Employees extends CI_Model {
 			if($query->num_rows() > 0)
 			{
 				
-				return $query->row()->login_date;
+				return $query->row();
 			}
 			
 			return false;

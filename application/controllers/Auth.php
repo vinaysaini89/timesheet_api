@@ -165,8 +165,15 @@ class Auth extends CI_Controller {
 
 					if($emp = $this->employees->login($emp_id, $password))
 					{
-						if($login_date = $this->employees->checkLogin($emp_id)){
-							$emp->logged_in_time = $login_date;
+						if($re = $this->employees->checkLogin($emp_id)){
+							$emp->logged_in_time = $re->start_time;
+							if($re->end_time == 0){
+								$emp->logged_out_time = 0;
+							}
+							else
+							{
+								$emp->logged_out_time = 1;	
+							}
 							echo json_encode(['code'=>400, "message"=>'You are already logged in', 'data'=>$emp]);
 							die();
 						}	
