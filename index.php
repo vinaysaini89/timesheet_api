@@ -2,6 +2,7 @@
 header('Access-Control-Allow-Origin:*');
 header("Access-Control-Allow-Headers:*");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+date_default_timezone_set("Asia/Kolkata");
 /**
  * CodeIgniter
  *
