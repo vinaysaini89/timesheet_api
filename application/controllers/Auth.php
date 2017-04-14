@@ -33,6 +33,19 @@ class Auth extends CI_Controller {
 		$this->load->model('timesheet');	
 	}
 
+
+	public function getAllEmployee()
+	{
+		if($data = $this->employees->allEmployee()){
+			echo json_encode(['code'=>200, "message"=>'', 'data'=>$data]);
+			die();
+		}
+
+		echo json_encode(['code'=>400, "message"=>'', 'data'=>$data]);
+		die();
+
+	}
+
 	public function login()
 	{
 

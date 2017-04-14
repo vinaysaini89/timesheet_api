@@ -60,6 +60,7 @@ $route['checklogout']['GET'] = 'auth/checklogout';
 $route['create_report']['POST'] = 'project/createreports';
 $route['reason']['POST'] = 'project/timesheetreason';
 $route['timestart']['GET'] = 'auth/timestart';
+$route['getallemployee']['GET'] = 'auth/getAllEmployee';
 
 
 //Admin Dashborad
