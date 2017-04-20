@@ -159,7 +159,33 @@ class Project extends CI_Controller {
 		
 	}
 
+	public function loginReason()
+	{
+		$emp_id = $this->input->get('emp_id');
+		$login_time = $this->input->post('login_time');
+		$reason = $this->input->post('reason');
+		if(!$emp_id){
+			echo json_encode(['code'=>401, "message"=>'employees id is required']);
+			die();
+		}
 
+		
+
+		if(!$login_time){
+			echo json_encode(['code'=>401, "message"=>'Logged in time is required']);
+			die();
+		}
+
+		if(!$reason){
+			echo json_encode(['code'=>401, "message"=>'reason is required']);
+			die();
+		}
+
+		$this->timesheet_reasons->createReasonsForLogin($emp_id, $login_time, $reason);
+		echo json_encode(['code'=>200, "message"=>'']);
+		die();
+		
+	}
 
 
 	
