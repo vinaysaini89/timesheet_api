@@ -58,7 +58,7 @@ class Auth extends CI_Controller {
 	{
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$emp_id = $this->input->get('emp_id');
-			$password = trim(md5($this->input->get('password')));
+			$password = $this->input->get('password');
 			if(!$emp_id)
 					{
 						echo json_encode(['code'=>401, "message"=>'Employee id is required']);
@@ -87,7 +87,7 @@ class Auth extends CI_Controller {
 				}
 				else
 				{
-					echo json_encode(['code'=>401, "message"=>'Employee id and password does not match']);
+					echo json_encode(['code'=>401, "message"=>'You are already logged Out']);
 					die();
 				}
 
@@ -105,7 +105,7 @@ class Auth extends CI_Controller {
 	{
 		if($this->input->server('REQUEST_METHOD') == 'GET'){
 			$emp_id = $this->input->get('emp_id');
-			$password = trim(md5($this->input->get('password')));
+			$password = $this->input->get('password');
 			if(!$emp_id)
 					{
 						echo json_encode(['code'=>401, "message"=>'Employee id is required']);
@@ -161,7 +161,7 @@ class Auth extends CI_Controller {
 		
 			if($this->input->server('REQUEST_METHOD') == 'POST'){
 					$emp_id = $this->input->get('emp_id');
-					$password = trim(md5($this->input->get('password')));
+					$password = $this->input->get('password');
 
 					if(!$emp_id)
 					{
