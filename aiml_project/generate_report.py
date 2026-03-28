@@ -210,7 +210,7 @@ def add_abstract(pdf: ReportPDF):
         "forward and backward context, while the decoder generates responses token-by-token "
         "using an attention mechanism that dynamically focuses on relevant source positions. "
         "The model achieves a BLEU-1 score of approximately 0.12-0.18 and a validation "
-        "perplexity in the range of 30-60 after 10 training epochs, demonstrating the "
+        "perplexity in the range of 30-60 after 20 training epochs, demonstrating the "
         "viability of the approach. Future work includes transformer-based architectures, "
         "domain-specific fine-tuning, and integration of retrieval-augmented generation."
     ))
