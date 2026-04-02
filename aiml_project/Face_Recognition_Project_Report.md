@@ -60,7 +60,7 @@ The **Labeled Faces in the Wild (LFW)** dataset is a public benchmark dataset fo
 | **Total Images** | ~13,233 face images |
 | **Number of Individuals** | ~5,749 unique people |
 | **Image Size (original)** | 250 × 250 pixels |
-| **Image Size (used)** | 62 × 47 pixels (grayscale after resizing) |
+| **Image Size (used)** | 50 × 37 pixels (grayscale, resize=0.4) |
 | **Color** | Grayscale |
 | **Filtering** | Only individuals with ≥70 images are used |
 
@@ -68,9 +68,9 @@ The **Labeled Faces in the Wild (LFW)** dataset is a public benchmark dataset fo
 
 After filtering for individuals with at least 70 images, we obtain a balanced subset suitable for training a classifier. The following preprocessing steps are applied:
 
-1. **Resizing:** Images are resized to 62×47 pixels (default from sklearn).
+1. **Resizing:** Images are resized to 50×37 pixels (resize=0.4 from sklearn).
 2. **Normalization:** Pixel values are scaled to [0, 1] range.
-3. **Tensor Conversion:** Images are converted to PyTorch tensors with shape (1, 62, 47) for single-channel input.
+3. **Tensor Conversion:** Images are converted to PyTorch tensors with shape (1, 50, 37) for single-channel input.
 4. **Train/Test Split:** 75% training, 25% testing with stratified sampling.
 5. **Data Augmentation (Training):** Random horizontal flips and small random rotations (±10°) to improve generalization.
 
@@ -128,30 +128,30 @@ Input Image → Preprocessing → CNN Feature Extraction → Fully Connected Cla
 
 ### 5.1 CNN Architecture
 
-The model is a custom CNN designed for the 62×47 grayscale input:
+The model is a custom CNN designed for the 50×37 grayscale input:
 
 ```
 Layer                    | Output Shape      | Parameters
 -------------------------|-------------------|----------
-Input                    | (1, 62, 47)       | -
-Conv2d(1→32, 3×3, pad=1)| (32, 62, 47)      | 320
-BatchNorm2d(32)          | (32, 62, 47)      | 64
-ReLU + MaxPool2d(2×2)   | (32, 31, 23)      | -
-Conv2d(32→64, 3×3, pad=1)| (64, 31, 23)     | 18,496
-BatchNorm2d(64)          | (64, 31, 23)      | 128
-ReLU + MaxPool2d(2×2)   | (64, 15, 11)      | -
-Conv2d(64→128, 3×3, pad=1)| (128, 15, 11)   | 73,856
-BatchNorm2d(128)         | (128, 15, 11)     | 256
-ReLU + MaxPool2d(2×2)   | (128, 7, 5)       | -
-Flatten                  | (4480)            | -
-Linear(4480→512)         | (512)             | 2,294,272
+Input                    | (1, 50, 37)       | -
+Conv2d(1→32, 3×3, pad=1)| (32, 50, 37)      | 320
+BatchNorm2d(32)          | (32, 50, 37)      | 64
+ReLU + MaxPool2d(2×2)   | (32, 25, 18)      | -
+Conv2d(32→64, 3×3, pad=1)| (64, 25, 18)     | 18,496
+BatchNorm2d(64)          | (64, 25, 18)      | 128
+ReLU + MaxPool2d(2×2)   | (64, 12, 9)       | -
+Conv2d(64→128, 3×3, pad=1)| (128, 12, 9)    | 73,856
+BatchNorm2d(128)         | (128, 12, 9)      | 256
+ReLU + MaxPool2d(2×2)   | (128, 6, 4)       | -
+Flatten                  | (3072)            | -
+Linear(3072→512)         | (512)             | 1,572,864
 ReLU + Dropout(0.5)      | (512)             | -
 Linear(512→128)          | (128)             | 65,664
 ReLU + Dropout(0.3)      | (128)             | -
 Linear(128→n_classes)    | (n_classes)       | 903
 ```
 
-**Total Parameters:** ~2,453,959
+**Total Parameters:** ~1,732,551
 
 ### 5.2 Design Choices
 
