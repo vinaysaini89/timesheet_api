@@ -246,7 +246,7 @@ The notebook includes the following visualizations:
 1. **Class Imbalance:** The LFW dataset is heavily skewed toward certain individuals. Addressed partially through stratified splitting and data augmentation.
 2. **Limited Dataset Size:** With only ~1,200 filtered images (7 classes), deep CNNs risk overfitting. Mitigated with dropout, batch normalization, and early stopping.
 3. **Pose and Lighting Variation:** LFW images are "in the wild"—varying poses, lighting, backgrounds, and expressions make classification harder.
-4. **Low Resolution:** The 62×47 pixel images lose fine-grained facial details.
+4. **Low Resolution:** The 50×37 pixel images lose fine-grained facial details.
 
 ### 9.2 Limitations
 
