@@ -20,7 +20,6 @@
 5. [Methodology](#5-methodology)
 6. [Evaluation](#6-evaluation)
 7. [Conclusion](#7-conclusion)
-8. [References](#8-references)
 
 ---
 
@@ -330,52 +329,6 @@ Key findings include:
 2. **Limited Dataset Size:** With only ~1,288 filtered images, deep CNNs risk overfitting, necessitating aggressive regularization.
 3. **Pose and Lighting Variation:** The "in the wild" nature of LFW images introduces significant intra-class variation that makes classification harder.
 4. **Low Resolution:** The 50 × 37 pixel images lose fine-grained facial details that could aid identification.
-
-### 7.3 Limitations
-
-1. **Closed-Set Recognition:** The model can only classify individuals it was trained on. It cannot detect or handle unknown identities.
-2. **Small Number of Classes:** Only 7 individuals meet the 70-image threshold, limiting the scope of the classifier.
-3. **Grayscale Only:** Color information, which could provide additional discriminative cues, is not utilized.
-4. **No Face Detection:** The pipeline assumes pre-cropped and aligned face images.
-
-### 7.4 Future Work
-
-1. **Transfer Learning:** Leverage pre-trained models (e.g., VGGFace, FaceNet, ArcFace) as feature extractors to significantly boost accuracy with limited data.
-2. **Face Embeddings and Open-Set Recognition:** Implement a Siamese network or triplet loss to learn face embeddings for open-set recognition, enabling identification of unknown individuals.
-3. **Advanced Data Augmentation:** Apply techniques such as CutMix, random erasing, and color jittering to better handle class imbalance and improve robustness.
-4. **Higher Resolution Inputs:** Train on larger images to preserve fine-grained facial details.
-5. **Face Detection Integration:** Incorporate MTCNN or RetinaFace for an end-to-end pipeline from raw images to identity predictions.
-6. **Real-Time Deployment:** Optimize the model for real-time face recognition using a webcam stream.
-7. **Fairness Analysis:** Evaluate model performance across demographic groups to detect and mitigate potential biases.
-8. **Class Weighting:** Apply weighted cross-entropy loss to counteract class imbalance during training.
-
----
-
-## 8. References
-
-1. Huang, G. B., Ramesh, M., Berg, T., & Learned-Miller, E. (2007). *Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments.* University of Massachusetts, Amherst, Technical Report 07-49.
-
-2. LeCun, Y., Bottou, L., Bengio, Y., & Haffner, P. (1998). *Gradient-Based Learning Applied to Document Recognition.* Proceedings of the IEEE, 86(11), 2278–2324.
-
-3. Schroff, F., Kalenichenko, D., & Philbin, J. (2015). *FaceNet: A Unified Embedding for Face Recognition and Clustering.* IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 815–823.
-
-4. Taigman, Y., Yang, M., Ranzato, M., & Wolf, L. (2014). *DeepFace: Closing the Gap to Human-Level Performance in Face Verification.* IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 1701–1708.
-
-5. He, K., Zhang, X., Ren, S., & Sun, J. (2016). *Deep Residual Learning for Image Recognition.* IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 770–778.
-
-6. Ioffe, S., & Szegedy, C. (2015). *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift.* International Conference on Machine Learning (ICML), 448–456.
-
-7. Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., & Salakhutdinov, R. (2014). *Dropout: A Simple Way to Prevent Neural Networks from Overfitting.* Journal of Machine Learning Research, 15(56), 1929–1958.
-
-8. Glorot, X., & Bengio, Y. (2010). *Understanding the Difficulty of Training Deep Feedforward Neural Networks.* Proceedings of the International Conference on Artificial Intelligence and Statistics (AISTATS), 249–256.
-
-9. Shorten, C., & Khoshgoftaar, T. M. (2019). *A Survey on Image Data Augmentation for Deep Learning.* Journal of Big Data, 6(1), 1–48.
-
-10. Scikit-learn LFW Dataset Documentation: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_lfw_people.html
-
-11. PyTorch Documentation: https://pytorch.org/docs/stable/index.html
-
-12. Kingma, D. P., & Ba, J. (2015). *Adam: A Method for Stochastic Optimization.* International Conference on Learning Representations (ICLR).
 
 ---
 
